@@ -408,7 +408,7 @@ class csstidy_print
 	}
 
 	/**
-	 * Get the size of either input or output CSS in KB
+	 * Get the size of either input or output CSS in KiB
 	 * @param string $loc default is "output"
 	 * @access public
 	 * @return integer
@@ -421,9 +421,9 @@ class csstidy_print
 		}
 
 		if ($loc === 'input') {
-			return (strlen($this->input_css) / 1000);
+			return (strlen($this->input_css) / 1024);
 		} else {
-			return (strlen($this->output_css_plain) / 1000);
+			return (strlen($this->output_css_plain) / 1024);
 		}
 	}
 }
