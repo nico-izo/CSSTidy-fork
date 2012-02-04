@@ -69,7 +69,7 @@ $GLOBALS['csstidy']['at_rules'] = array('page' => 'is','font-face' => 'is','char
  /**
  * Properties that need a value with unit
  *
- * @todo CSS3 properties
+ * @todo CSS3.0 properties
  * @see compress_numbers();
  * @global array $GLOBALS['csstidy']['unit_values']
  * @version 1.2
@@ -83,7 +83,7 @@ $GLOBALS['csstidy']['unit_values'] = array ('background', 'background-position',
 /**
  * Properties that allow <color> as value
  *
- * @todo CSS3 properties
+ * @todo CSS3.0 properties
  * @see compress_numbers();
  * @global array $GLOBALS['csstidy']['color_values']
  * @version 1.0
@@ -101,7 +101,7 @@ $GLOBALS['csstidy']['color_values'][] = 'outline-color';
 /**
  * Default values for the background properties
  *
- * @todo Possibly property names will change during CSS3 development
+ * @todo Possibly property names will change during CSS3.0 development
  * @global array $GLOBALS['csstidy']['background_prop_default']
  * @see dissolve_short_bg()
  * @see merge_bg()
@@ -271,7 +271,7 @@ $GLOBALS['csstidy']['replace_colors']['yellowgreen'] = '#9acd32';
  * A list of all shorthand properties that are devided into four properties and/or have four subvalues
  *
  * @global array $GLOBALS['csstidy']['shorthands']
- * @todo Are there new ones in CSS3?
+ * @todo Are there new ones in CSS3.0?
  * @see dissolve_4value_shorthands()
  * @see merge_4value_shorthands()
  * @version 1.0
@@ -288,84 +288,84 @@ $GLOBALS['csstidy']['shorthands']['border-radius'] = array('border-top-left-radi
  * All CSS Properties. Needed for csstidy::property_is_next()
  *
  * @global array $GLOBALS['csstidy']['all_properties']
- * @todo Add CSS3 properties
+ * @todo Add CSS3.0 properties
  * @version 1.0
  * @see csstidy::property_is_next()
  */
 $GLOBALS['csstidy']['all_properties'] = array();
-$GLOBALS['csstidy']['all_properties']['background'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['background-color'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['background-image'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['background-repeat'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['background-attachment'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['background-position'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-top'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-right'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-bottom'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-left'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-color'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-top-color'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-bottom-color'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-left-color'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-right-color'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-style'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-top-style'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-right-style'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-left-style'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-bottom-style'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-width'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-top-width'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-right-width'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-left-width'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-bottom-width'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-collapse'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['border-spacing'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['bottom'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['caption-side'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['content'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['clear'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['clip'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['color'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['counter-reset'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['counter-increment'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['cursor'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['empty-cells'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['display'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['direction'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['float'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['font'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['font-family'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['font-style'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['font-variant'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['font-weight'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['font-stretch'] = 'CSS2.0';
-$GLOBALS['csstidy']['all_properties']['font-size-adjust'] = 'CSS2.0';
-$GLOBALS['csstidy']['all_properties']['font-size'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['height'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['left'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['line-height'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['list-style'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['list-style-type'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['list-style-image'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['list-style-position'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['margin'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['margin-top'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['margin-right'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['margin-bottom'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['margin-left'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['marks'] = 'CSS1.0,CSS2.0';
-$GLOBALS['csstidy']['all_properties']['marker-offset'] = 'CSS2.0';
-$GLOBALS['csstidy']['all_properties']['max-height'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['max-width'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['min-height'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['min-width'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['overflow'] = 'CSS1.0,CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['orphans'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['outline'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['outline-width'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['outline-style'] = 'CSS2.0,CSS2.1';
-$GLOBALS['csstidy']['all_properties']['outline-color'] = 'CSS2.0,CSS2.1';
+$GLOBALS['csstidy']['all_properties']['background'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['background-color'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['background-image'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['background-repeat'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['background-attachment'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['background-position'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-top'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-right'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-bottom'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-left'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-color'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-top-color'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-bottom-color'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-left-color'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-right-color'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-style'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-top-style'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-right-style'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-left-style'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-bottom-style'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-width'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-top-width'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-right-width'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-left-width'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-bottom-width'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-collapse'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['border-spacing'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['bottom'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['caption-side'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['content'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['clear'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['clip'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['color'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['counter-reset'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['counter-increment'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['cursor'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['empty-cells'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['display'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['direction'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['float'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['font'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['font-family'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['font-style'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['font-variant'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['font-weight'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['font-stretch'] = 'CSS2.0,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['font-size-adjust'] = 'CSS2.0,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['font-size'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['height'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['left'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['line-height'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['list-style'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['list-style-type'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['list-style-image'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['list-style-position'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['margin'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['margin-top'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['margin-right'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['margin-bottom'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['margin-left'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['marks'] = 'CSS1.0,CSS2.0,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['marker-offset'] = 'CSS2.0,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['max-height'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['max-width'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['min-height'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['min-width'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['overflow'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['orphans'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['outline'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['outline-width'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['outline-style'] = 'CSS2.0,CSS2.1,CSS3.0';
+$GLOBALS['csstidy']['all_properties']['outline-color'] = 'CSS2.0,CSS2.1,CSS3.0';
 $GLOBALS['csstidy']['all_properties']['padding'] = 'CSS1.0,CSS2.0,CSS2.1';
 $GLOBALS['csstidy']['all_properties']['padding-top'] = 'CSS1.0,CSS2.0,CSS2.1';
 $GLOBALS['csstidy']['all_properties']['padding-right'] = 'CSS1.0,CSS2.0,CSS2.1';
@@ -377,6 +377,7 @@ $GLOBALS['csstidy']['all_properties']['page-break-inside'] = 'CSS2.0,CSS2.1';
 $GLOBALS['csstidy']['all_properties']['page'] = 'CSS2.0';
 $GLOBALS['csstidy']['all_properties']['position'] = 'CSS1.0,CSS2.0,CSS2.1';
 $GLOBALS['csstidy']['all_properties']['quotes'] = 'CSS2.0,CSS2.1';
+$GLOBALS['csstidy']['all_properties']['resize'] = 'CSS3.0';
 $GLOBALS['csstidy']['all_properties']['right'] = 'CSS2.0,CSS2.1';
 $GLOBALS['csstidy']['all_properties']['size'] = 'CSS1.0,CSS2.0';
 $GLOBALS['csstidy']['all_properties']['speak-header'] = 'CSS2.0,CSS2.1';
