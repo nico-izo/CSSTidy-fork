@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/csstidy/!svn/ver/123/trunk/testing/unit-tests/csst/selectors/errors
+END
+duplicate-combinator.csst
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/csstidy/!svn/ver/123/trunk/testing/unit-tests/csst/selectors/errors/duplicate-combinator.csst
+END
+dangling-combinator.csst
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/csstidy/!svn/ver/123/trunk/testing/unit-tests/csst/selectors/errors/dangling-combinator.csst
+END

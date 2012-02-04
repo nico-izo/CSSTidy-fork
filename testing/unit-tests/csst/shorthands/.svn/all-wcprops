@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/csstidy/!svn/ver/131/trunk/testing/unit-tests/csst/shorthands
+END
+font-weight-general.csst
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/shorthands/font-weight-general.csst
+END
+font-weight-noopt.csst
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/shorthands/font-weight-noopt.csst
+END
+margin-general.csst
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/shorthands/margin-general.csst
+END
+background-general.csst
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/csstidy/!svn/ver/131/trunk/testing/unit-tests/csst/shorthands/background-general.csst
+END
+margin-noopt.csst
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/shorthands/margin-noopt.csst
+END
+background-noopt.csst
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/csstidy/!svn/ver/123/trunk/testing/unit-tests/csst/shorthands/background-noopt.csst
+END
+font-general.csst
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/csstidy/!svn/ver/128/trunk/testing/unit-tests/csst/shorthands/font-general.csst
+END
+padding-general.csst
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/shorthands/padding-general.csst
+END
+font-face.csst
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/csstidy/!svn/ver/131/trunk/testing/unit-tests/csst/shorthands/font-face.csst
+END
+font-noopt.csst
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/csstidy/!svn/ver/123/trunk/testing/unit-tests/csst/shorthands/font-noopt.csst
+END
+padding-noopt.csst
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/shorthands/padding-noopt.csst
+END

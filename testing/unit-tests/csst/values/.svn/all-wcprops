@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/csstidy/!svn/ver/131/trunk/testing/unit-tests/csst/values
+END
+font-family.csst
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/csstidy/!svn/ver/131/trunk/testing/unit-tests/csst/values/font-family.csst
+END
+number-zero.csst
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/csstidy/!svn/ver/99/trunk/testing/unit-tests/csst/values/number-zero.csst
+END
+number-leadingzero.csst
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/csstidy/!svn/ver/101/trunk/testing/unit-tests/csst/values/number-leadingzero.csst
+END
+number-float.csst
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/csstidy/!svn/ver/99/trunk/testing/unit-tests/csst/values/number-float.csst
+END
+important.csst
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/csstidy/!svn/ver/101/trunk/testing/unit-tests/csst/values/important.csst
+END
+number-missingunit.csst
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/csstidy/!svn/ver/123/trunk/testing/unit-tests/csst/values/number-missingunit.csst
+END
+number-missingzero.csst
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/csstidy/!svn/ver/123/trunk/testing/unit-tests/csst/values/number-missingzero.csst
+END
+number-signed.csst
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/csstidy/!svn/ver/99/trunk/testing/unit-tests/csst/values/number-signed.csst
+END
+number-trailingzero.csst
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/csstidy/!svn/ver/99/trunk/testing/unit-tests/csst/values/number-trailingzero.csst
+END
+colors.csst
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/csstidy/!svn/ver/100/trunk/testing/unit-tests/csst/values/colors.csst
+END

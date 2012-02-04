@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/properties
+END
+css1.csst
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/properties/css1.csst
+END
+css2.csst
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/properties/css2.csst
+END
+css21.csst
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/csstidy/!svn/ver/120/trunk/testing/unit-tests/csst/properties/css21.csst
+END
