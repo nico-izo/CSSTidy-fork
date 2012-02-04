@@ -36,7 +36,6 @@ define('DEFAULT_AT', 41);
 /**
  * All whitespace allowed in CSS
  *
- * @global array $csstidy_config['whitespace']
  * @version 1.0
  */
 $csstidy_config = array();
@@ -45,7 +44,6 @@ $csstidy_config['whitespace'] = array(' ',"\n","\t","\r","\x0B");
 /**
  * All CSS tokens used by csstidy
  *
- * @global string $csstidy_config['tokens']
  * @version 1.0
  */
 $csstidy_config['tokens'] = '/@}{;:=\'"(,\\!$%&)*+.<>?[]^`|~';
@@ -54,15 +52,13 @@ $csstidy_config['tokens'] = '/@}{;:=\'"(,\\!$%&)*+.<>?[]^`|~';
  * All CSS units (CSS 3 units included)
  *
  * @see compress_numbers()
- * @global array $csstidy_config['units']
- * @version 1.0
+ * @version 1.0.1
  */
 $csstidy_config['units'] = array('in','cm','mm','pt','pc','px','rem','em','%','ex','ch','vw','vh','vm','deg','grad','rad','turn','ms','s','khz','hz','fr','gr');
 
 /**
  * Available at-rules
  *
- * @global array $csstidy_config['at_rules']
  * @version 1.0
  */
 $csstidy_config['at_rules'] = array('page' => 'is','font-face' => 'is','charset' => 'iv', 'import' => 'iv','namespace' => 'iv','media' => 'at');
@@ -72,7 +68,6 @@ $csstidy_config['at_rules'] = array('page' => 'is','font-face' => 'is','charset'
  *
  * @todo CSS3.0 properties
  * @see compress_numbers();
- * @global array $csstidy_config['unit_values']
  * @version 1.2
  */
 $csstidy_config['unit_values'] = array ('background', 'background-position', 'border', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border-width',
@@ -86,7 +81,6 @@ $csstidy_config['unit_values'] = array ('background', 'background-position', 'bo
  *
  * @todo CSS3.0 properties
  * @see compress_numbers();
- * @global array $csstidy_config['color_values']
  * @version 1.0
  */
 $csstidy_config['color_values'] = array();
@@ -103,7 +97,6 @@ $csstidy_config['color_values'][] = 'outline-color';
  * Default values for the background properties
  *
  * @todo Possibly property names will change during CSS3.0 development
- * @global array $csstidy_config['background_prop_default']
  * @see dissolve_short_bg()
  * @see merge_bg()
  * @version 1.0
@@ -121,7 +114,6 @@ $csstidy_config['background_prop_default']['background-color'] = 'transparent';
 /**
  * Default values for the font properties
  *
- * @global array $csstidy_config['font_prop_default']
  * @see merge_fonts()
  * @version 1.3
  */
@@ -271,11 +263,10 @@ $csstidy_config['replace_colors']['yellowgreen'] = '#9acd32';
 /**
  * A list of all shorthand properties that are devided into four properties and/or have four subvalues
  *
- * @global array $csstidy_config['shorthands']
  * @todo Are there new ones in CSS3.0?
  * @see dissolve_4value_shorthands()
  * @see merge_4value_shorthands()
- * @version 1.0
+ * @version 1.1
  */
 $csstidy_config['shorthands'] = array();
 $csstidy_config['shorthands']['border-color'] = array('border-top-color','border-right-color','border-bottom-color','border-left-color');
@@ -288,9 +279,8 @@ $csstidy_config['shorthands']['border-radius'] = array('border-top-left-radius',
 /**
  * All CSS Properties. Needed for csstidy::property_is_next()
  *
- * @global array $csstidy_config['all_properties']
  * @todo Add CSS3.0 properties
- * @version 1.0
+ * @version 1.1
  * @see csstidy::property_is_next()
  */
 $csstidy_config['all_properties'] = array();
@@ -423,9 +413,9 @@ $csstidy_config['all_properties']['speak-numeral'] = 'CSS2.0,CSS2.1';
 /**
  * An array containing all predefined templates.
  *
- * @global array $csstidy_config['predefined_templates']
  * @version 1.0
  * @see csstidy::load_template()
+ * @deprecated
  */
 $csstidy_config['predefined_templates']['default'][] = '<span class="at">'; //string before @rule
 $csstidy_config['predefined_templates']['default'][] = '</span> <span class="format">{</span>'."\n"; //bracket after @-rule
