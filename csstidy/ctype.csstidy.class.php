@@ -39,5 +39,3 @@ if (!function_exists('ctype_alpha')) {
         return preg_match("/[a-zA-Z]/", $text);
     }
 }
-
-?>

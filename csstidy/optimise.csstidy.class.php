@@ -41,21 +41,36 @@
 
 class csstidy_optimise
 {
+	private $parser;
+	
+	private $css;
+	
+	private $sub_value;
+	
+	private $at;
+	private $selector;
+	private $property;
+	private $value;
+	
+	private $metacss;
+	
 	/**
 	 * Constructor
 	 * @param array $css contains the class csstidy
-	 * @access private
+	 * @access public
 	 * @version 1.0
 	 */
-	function csstidy_optimise(&$css)
+	public function __construct(&$css)
 	{
-		$this->parser	=& $css;
-		$this->css	   =& $css->css;
+		$this->parser =& $css;
+		$this->css =& $css->css;
 		$this->sub_value =& $css->sub_value;
-		$this->at		=& $css->at;
-		$this->selector  =& $css->selector;
-		$this->property  =& $css->property;
-		$this->value	 =& $css->value;
+		$this->at =& $css->at;
+		$this->selector =& $css->selector;
+		$this->property =& $css->property;
+		$this->value =& $css->value;
+		
+		$this->meta_css =& $css->meta_css;
 	}
 
 	/**

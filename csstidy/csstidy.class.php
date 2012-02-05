@@ -274,41 +274,56 @@ class csstidy {
 	private $fontface = 0;
 
 	/**
-	 * Loads standard template and sets default settings
+	 * Metaconfig
+	 * @fixme rewrite
 	 * @access private
+	 */
+	 private $meta_css = array(); 
+
+	/**
+	 * Construct function that loads default config 
+	 * @access public
 	 * @version 1.3
 	 */
-	private function csstidy()
+	public function __construct($metacss = array(), $params = array())
 	{
-		$this->settings['remove_bslash'] = true;
-		$this->settings['compress_colors'] = true;
-		$this->settings['compress_font-weight'] = true;
-		$this->settings['lowercase_s'] = false;
-	/*
-	1 common shorthands optimization
-	2 + font property optimization
-	3 + background property optimization
-	*/
-		$this->settings['optimise_shorthands'] = 1;
-		$this->settings['remove_last_;'] = true;
-	/* rewrite all properties with low case, better for later gzip */
-		$this->settings['case_properties'] = 1;
-	/* sort properties in alpabetic order, better for later gzip */
-		$this->settings['sort_properties'] = true;
-	/*
-	1, 3, 5, etc -- enable sorting selectors inside @media: a{}b{}c{}
-	2, 5, 8, etc -- enable sorting selectors inside one CSS declaration: a,b,c{}
-	*/
-		$this->settings['sort_selectors'] = 2;
-	/* is dangeroues to be used: CSS is broken sometimes */
-		$this->settings['merge_selectors'] = 0;
-	/* preserve or not browser hacks */
-		$this->settings['discard_invalid_selectors'] = false;
-		$this->settings['discard_invalid_properties'] = false;
-		$this->settings['css_level'] = 'CSS2.1';
-		$this->settings['preserve_css'] = false;
-		$this->settings['timestamp'] = false;
+		if(!count($params)) {
+			$this->settings['remove_bslash'] = true;
+			$this->settings['compress_colors'] = true;
+			$this->settings['compress_font-weight'] = true;
+			$this->settings['lowercase_s'] = false;
+			/*
+			1 common shorthands optimization
+			2 + font property optimization
+			3 + background property optimization
+			*/
+			$this->settings['optimise_shorthands'] = 1;
+			$this->settings['remove_last_semicolon'] = true;
+			/* rewrite all properties with low case, better for later gzip */
+			$this->settings['case_properties'] = 1;
+			/* sort properties in alpabetic order, better for later gzip */
+			$this->settings['sort_properties'] = true;
+			/*
+			1, 3, 5, etc -- enable sorting selectors inside @media: a{}b{}c{}
+			2, 5, 8, etc -- enable sorting selectors inside one CSS declaration: a,b,c{}
+			*/
+			$this->settings['sort_selectors'] = 2;
+			/* is dangeroues to be used: CSS is broken sometimes */
+			$this->settings['merge_selectors'] = 0;
+			/* preserve or not browser hacks */
+			$this->settings['discard_invalid_selectors'] = false;
+			$this->settings['discard_invalid_properties'] = false;
+			$this->settings['css_level'] = 'CSS3.0';
+			$this->settings['preserve_css'] = false;
+			$this->settings['timestamp'] = false;
+		} else {
+			$this->settings = $params;
+		}
+		
+		$this->meta_css = $metacss;
+		
 		$this->optimise = new csstidy_optimise($this);
+		$this->print = new csstidy_print($this);
 	}
 
 	/**
@@ -367,6 +382,8 @@ class csstidy {
 	 * @access public
 	 * @return bool
 	 * @version 1.0
+	 * 
+	 * @deprecated
 	 */
 	public function set_cfg($setting,$value=null)
 	{
@@ -438,7 +455,7 @@ class csstidy {
 	{
 		++$i;
 		$add = '';
-		$tokens =& $GLOBALS['csstidy']['tokens'];
+		//$tokens =& $GLOBALS['csstidy']['tokens'];
 		$replaced = false;
 
 		while($i < strlen($string) && (ctype_xdigit($string{$i}) || ctype_space($string{$i})) && strlen($add) < 6)
@@ -466,7 +483,7 @@ class csstidy {
 			$i--;
 		}
 
-		if($add !== '\\' || !$this->get_cfg('remove_bslash') || strpos($tokens, $string{$i+1}) !== false) {
+		if($add !== '\\' || !$this->get_cfg('remove_bslash') || strpos($this->meta_css['tokens'], $string{$i+1}) !== false) {
 			return $add;
 		}
 
@@ -536,10 +553,10 @@ class csstidy {
 	 */
 	public function load_template($content, $from_file=true)
 	{
-		$predefined_templates =& $GLOBALS['csstidy']['predefined_templates'];
+		//$predefined_templates =& $GLOBALS['csstidy']['predefined_templates'];
 		if($content === 'high_compression' || $content === 'default' || $content === 'highest_compression' || $content === 'low_compression')
 		{
-			$this->template = $predefined_templates[$content];
+			$this->template = $this->meta_css['predefined_templates'][$content];
 			return;
 		}
 
@@ -577,8 +594,8 @@ class csstidy {
 	 */
 	public function is_token(&$string, $i)
 	{
-		$tokens =& $GLOBALS['csstidy']['tokens'];
-		return (strpos($tokens, $string{$i}) !== false && !csstidy::escaped($string,$i));
+		//$tokens =& $GLOBALS['csstidy']['tokens'];
+		return (strpos($this->meta_css['tokens'], $string{$i}) !== false && !csstidy::escaped($string,$i));
 	}
 
 
@@ -595,11 +612,14 @@ class csstidy {
 		@setlocale(LC_ALL, 'C');
 
 		// PHP bug? Settings need to be refreshed in PHP4
-		$this->print = new csstidy_print($this);
-		$this->optimise = new csstidy_optimise($this);
+		//$this->print = new csstidy_print($this);
+		//$this->optimise = new csstidy_optimise($this);
 
-		$all_properties =& $GLOBALS['csstidy']['all_properties'];
-		$at_rules =& $GLOBALS['csstidy']['at_rules'];
+		//$all_properties =& $GLOBALS['csstidy']['all_properties'];
+		//$at_rules =& $GLOBALS['csstidy']['at_rules'];
+		
+		$all_properties =& $this->meta_css['all_properties'];
+		$at_rules =& $this->meta_css['at_rules'];
 
 		$this->css = array();
 		$this->print->input_css = $string;
@@ -922,13 +942,13 @@ class csstidy {
 					$temp_add = "\\A ";
 					$this->log('Fixed incorrect newline in string','Warning');
 				}
-				if (!($this->str_char === ')' && in_array($string{$i}, $GLOBALS['csstidy']['whitespace']) && !$this->str_in_str)) {
+				if (!($this->str_char === ')' && in_array($string{$i}, $this->meta_css['whitespace']) && !$this->str_in_str)) {
 					$this->cur_string .= $temp_add;
 				}
 				if($string{$i} == $this->str_char && !csstidy::escaped($string,$i) && !$this->str_in_str)
 				{
 					$this->status = $this->from;
-					if (!preg_match('|[' . implode('', $GLOBALS['csstidy']['whitespace']) . ']|uis', $this->cur_string) && $this->property !== 'content') {
+					if (!preg_match('|[' . implode('', $this->meta_css['whitespace']) . ']|uis', $this->cur_string) && $this->property !== 'content') {
 						if (!$this->quoted_string) {
 							if ($this->str_char === '"' || $this->str_char === '\'') {
 								// Temporarily disable this optimization to avoid problems with @charset rule, quote properties, and some attribute selectors...
@@ -1095,7 +1115,7 @@ class csstidy {
 	 */
 	public static function is_important(&$value)
 	{
-		return (!strcasecmp(substr(str_replace($GLOBALS['csstidy']['whitespace'],'',$value),-10,10),'!important'));
+		return (!strcasecmp(substr(str_replace($this->meta_css['whitespace'],'',$value),-10,10),'!important'));
 	}
 
 	/**
@@ -1129,7 +1149,7 @@ class csstidy {
 	 */
 	private function property_is_next($istring, $pos)
 	{
-		$all_properties =& $GLOBALS['csstidy']['all_properties'];
+		//$all_properties =& $GLOBALS['csstidy']['all_properties'];
 		$istring = substr($istring,$pos,strlen($istring)-$pos);
 		$pos = strpos($istring,':');
 		if($pos === false)
@@ -1137,7 +1157,7 @@ class csstidy {
 			return false;
 		}
 		$istring = strtolower(trim(substr($istring,0,$pos)));
-		if(isset($all_properties[$istring]))
+		if(isset($this->meta_css['all_properties'][$istring]))
 		{
 			$this->log('Added semicolon to the end of declaration','Warning');
 			return true;
@@ -1153,7 +1173,7 @@ class csstidy {
 	 * @version 1.0
 	 */
 	public function property_is_valid($property) {
-		$all_properties =& $GLOBALS['csstidy']['all_properties'];
+		$all_properties =& $this->meta_css['all_properties'];
 		return (isset($all_properties[$property]) && strpos($all_properties[$property],strtoupper($this->get_cfg('css_level'))) !== false );
 	}
 

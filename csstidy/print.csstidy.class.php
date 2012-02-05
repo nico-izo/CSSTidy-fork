@@ -259,7 +259,7 @@ class csstidy_print
 
 				case VALUE:
 					$out .= $this->_htmlsp($token[1], $plain);
-					if($this->_seeknocomment($key, 1) == SEL_END && $this->parser->get_cfg('remove_last_;')) {
+					if($this->_seeknocomment($key, 1) == SEL_END && $this->parser->get_cfg('remove_last_semicolon')) {
 						$out .= str_replace(';', '', $template[6]);
 					} else {
 						$out .= $template[6];

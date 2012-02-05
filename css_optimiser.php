@@ -123,7 +123,7 @@ if(!isset($_REQUEST['rbs']) && isset($_REQUEST['post'])) $css->set_cfg('remove_b
 if(isset($_REQUEST['preserve_css'])) $css->set_cfg('preserve_css',true);
 if(isset($_REQUEST['sort_sel'])) $css->set_cfg('sort_selectors',true);
 if(isset($_REQUEST['sort_de'])) $css->set_cfg('sort_properties',true);
-if(isset($_REQUEST['remove_last_sem'])) $css->set_cfg('remove_last_;',true);
+if(isset($_REQUEST['remove_last_sem'])) $css->set_cfg('remove_last_semicolon',true);
 if(isset($_REQUEST['discard'])) $css->set_cfg('discard_invalid_properties',true);
 if(isset($_REQUEST['css_level'])) $css->set_cfg('css_level',$_REQUEST['css_level']);
 if(isset($_REQUEST['timestamp'])) $css->set_cfg('timestamp',true);
@@ -319,7 +319,7 @@ else {
 
 
             <input type="checkbox" id="remove_last_sem" name="remove_last_sem"
-                   <?php if($css->get_cfg('remove_last_;')) echo 'checked="checked"'; ?> />
+                   <?php if($css->get_cfg('remove_last_semicolon')) echo 'checked="checked"'; ?> />
    			<label for="remove_last_sem"><?php echo $lang[$l][42]; ?></label><br />
 
 
