@@ -84,7 +84,7 @@ class csstidy {
 	 * @var array
 	 * @access private
 	 */
-	private $tokens = array();
+	public $tokens = array(); // FIXME
 
 	/**
 	 * Printer class
@@ -107,21 +107,21 @@ class csstidy {
 	 * @var string
 	 * @access private
 	 */
-	private $charset = '';
+	public $charset = ''; // FIXME
 
 	/**
 	 * Saves all @import URLs
 	 * @var array
 	 * @access private
 	 */
-	private $import = array();
+	public $import = array(); // FIXME
 
 	/**
 	 * Saves the namespace
 	 * @var string
 	 * @access private
 	 */
-	private $namespace = '';
+	public $namespace = ''; // FIXME
 
 	/**
 	 * Contains the version of csstidy
@@ -159,21 +159,21 @@ class csstidy {
 	 * @var string
 	 * @access private
 	 */
-	private $at = '';
+	public $at = ''; // FIXME
 
 	/**
 	 * Saves the current selector
 	 * @var string
 	 * @access private
 	 */
-	private $selector = '';
+	public $selector = ''; // FIXME
 
 	/**
 	 * Saves the current property
 	 * @var string
 	 * @access private
 	 */
-	private $property = '';
+	public $property = ''; // FIXME
 
 	/**
 	 * Saves the position of , in selectors
@@ -187,7 +187,7 @@ class csstidy {
 	 * @var string
 	 * @access private
 	 */
-	private $value = '';
+	public $value = ''; // FIXME
 
 	/**
 	 * Saves the current sub-value
@@ -199,7 +199,7 @@ class csstidy {
 	 * @var string
 	 * @access private
 	 */
-	private $sub_value = '';
+	public $sub_value = ''; // FIXME
 
 	/**
 	 * Array which saves all subvalues for a property.
@@ -278,7 +278,7 @@ class csstidy {
 	 * @fixme rewrite
 	 * @access private
 	 */
-	 private $meta_css = array(); 
+	 public $meta_css = array(); // FIXME
 
 	/**
 	 * Construct function that loads default config 
@@ -415,7 +415,7 @@ class csstidy {
 	 * @access private
 	 * @version 1.0
 	 */
-	private function _add_token($type, $data, $do = false) {
+	public function _add_token($type, $data, $do = false) {
 		if($this->get_cfg('preserve_css') || $do) {
 			$this->tokens[] = array($type, ($type == COMMENT) ? $data : trim($data));
 		}
@@ -426,10 +426,10 @@ class csstidy {
 	 * @param string $message
 	 * @param string $type
 	 * @param integer $line
-	 * @access private
+	 * @access public
 	 * @version 1.0
 	 */
-	private function log($message,$type,$line = -1)
+	public function log($message,$type,$line = -1)
 	{
 		if($line === -1)
 		{
@@ -1098,7 +1098,7 @@ class csstidy {
 	 * @access private
 	 * @version 1.1
 	 */
-	private function merge_css_blocks($media,$selector,$css_add)
+	public function merge_css_blocks($media,$selector,$css_add)
 	{
 		foreach($css_add as $property => $value)
 		{
@@ -1113,9 +1113,10 @@ class csstidy {
 	 * @access public
 	 * @version 1.0
 	 */
-	public static function is_important(&$value)
+	public static function is_important(&$value) // FIXME!!!
 	{
-		return (!strcasecmp(substr(str_replace($this->meta_css['whitespace'],'',$value),-10,10),'!important'));
+		$whitespaces = array(' ',"\n","\t","\r","\x0B");
+		return (!strcasecmp(substr(str_replace($whitespaces,'',$value),-10,10),'!important'));
 	}
 
 	/**
@@ -1176,6 +1177,13 @@ class csstidy {
 		$all_properties =& $this->meta_css['all_properties'];
 		return (isset($all_properties[$property]) && strpos($all_properties[$property],strtoupper($this->get_cfg('css_level'))) !== false );
 	}
+	
+	public function return_formatted_output_css(){
+		return $this->print->formatted();
+	}
 
+	public function return_plain_output_css(){
+		return $this->print->plain();
+	}
 
 }

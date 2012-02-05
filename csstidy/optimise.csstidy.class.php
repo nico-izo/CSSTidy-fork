@@ -134,7 +134,7 @@ class csstidy_optimise
 	 */
 	function value()
 	{
-		$shorthands =& $GLOBALS['csstidy']['shorthands'];
+		$shorthands =& $this->meta_css['shorthands'];
 
 		// optimise shorthand properties
 		if(isset($shorthands[$this->property]))
@@ -161,7 +161,7 @@ class csstidy_optimise
 	 */
 	function shorthands()
 	{
-		$shorthands =& $GLOBALS['csstidy']['shorthands'];
+		$shorthands =& $this->meta_css['shorthands'];
 
 		if(!$this->parser->get_cfg('optimise_shorthands') || $this->parser->get_cfg('preserve_css')) {
 			return;
@@ -194,7 +194,7 @@ class csstidy_optimise
 	 */
 	function subvalue()
 	{
-		$replace_colors =& $GLOBALS['csstidy']['replace_colors'];
+		$replace_colors =& $this->meta_css['replace_colors'];
 
 		$this->sub_value = trim($this->sub_value);
 		if($this->sub_value == '') // caution : '0'
@@ -331,7 +331,7 @@ class csstidy_optimise
 	 */
 	function cut_color($color)
 	{
-		$replace_colors =& $GLOBALS['csstidy']['replace_colors'];
+		$replace_colors =& $this->meta_css['replace_colors'];
 
 		// rgb(0,0,0) -> #000000 (or #000 in this case later)
 		if(strtolower(substr($color,0,4)) === 'rgb(')
@@ -406,8 +406,8 @@ class csstidy_optimise
 	 */
 	function compress_numbers($subvalue)
 	{
-		$unit_values =& $GLOBALS['csstidy']['unit_values'];
-		$color_values =& $GLOBALS['csstidy']['color_values'];
+		$unit_values =& $this->meta_css['unit_values'];
+		$color_values =& $this->meta_css['color_values'];
 
 		// for font:1em/1em sans-serif...;
 		if($this->property === 'font')
@@ -462,7 +462,7 @@ class csstidy_optimise
 			return false;
 		}
 		
-		$units =& $GLOBALS['csstidy']['units'];
+		$units =& $this->meta_css['units'];
 		$return = array(0, '');
 		
 		$return[0] = floatval($string);
@@ -580,7 +580,7 @@ class csstidy_optimise
 	 */
 	function dissolve_4value_shorthands($property,$value)
 	{
-		$shorthands =& $GLOBALS['csstidy']['shorthands'];
+		$shorthands =& $this->meta_css['shorthands'];
 		if(!is_array($shorthands[$property]))
 		{
 			$return[$property] = $value;
@@ -694,7 +694,7 @@ class csstidy_optimise
 	function merge_4value_shorthands($array)
 	{
 		$return = $array;
-		$shorthands =& $GLOBALS['csstidy']['shorthands'];
+		$shorthands =& $this->meta_css['shorthands'];
 
 		foreach($shorthands as $key => $value)
 		{
@@ -734,7 +734,7 @@ class csstidy_optimise
 	 */
 	function dissolve_short_bg($str_value)
 	{
-		$background_prop_default =& $GLOBALS['csstidy']['background_prop_default'];
+		$background_prop_default =& $this->meta_css['background_prop_default'];
 		$repeat = array('repeat','repeat-x','repeat-y','no-repeat','space');
 		$attachment = array('scroll','fixed','local');
 		$clip = array('border','padding');
@@ -823,7 +823,7 @@ class csstidy_optimise
 	 */
 	function merge_bg($input_css)
 	{
-		$background_prop_default =& $GLOBALS['csstidy']['background_prop_default'];
+		$background_prop_default =& $this->meta_css['background_prop_default'];
 		// Max number of background images. CSS3 not yet fully implemented
 		$number_of_values = @max(count(csstidy_optimise::explode_ws(',',$input_css['background-image'])),count(csstidy_optimise::explode_ws(',',$input_css['background-color'])),1);
 		// Array with background images to check if BG image exists
@@ -904,7 +904,7 @@ class csstidy_optimise
 	 */
 	function dissolve_short_font($str_value)
 	{
-		$font_prop_default =& $GLOBALS['csstidy']['font_prop_default'];
+		$font_prop_default =& $this->meta_css['font_prop_default'];
 		$font_weight = array('normal','bold','bolder','lighter',100,200,300,400,500,600,700,800,900);
 		$font_variant = array('normal','small-caps');
 		$font_style = array('normal','italic','oblique');
@@ -1003,7 +1003,7 @@ class csstidy_optimise
 	 */
 	function merge_font($input_css)
 	{
-		$font_prop_default =& $GLOBALS['csstidy']['font_prop_default'];
+		$font_prop_default =& $this->meta_css['font_prop_default'];
 		$new_font_value = '';
 		$important = '';
 		// Skip if not font-family and font-size set

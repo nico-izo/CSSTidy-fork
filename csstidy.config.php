@@ -388,6 +388,41 @@ $csstidy_config['all_properties']['visibility'] = 'CSS2.0,CSS2.1,CSS3.0';
 $csstidy_config['all_properties']['width'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
 $csstidy_config['all_properties']['widows'] = 'CSS2.0,CSS2.1,CSS3.0';
 $csstidy_config['all_properties']['z-index'] = 'CSS1.0,CSS2.0,CSS2.1,CSS3.0';
+//CSS3
+$csstidy_config['all_properties']['animation'] = 'CSS3.0';
+$csstidy_config['all_properties']['animation-delay'] = 'CSS3.0';
+$csstidy_config['all_properties']['animation-direction'] = 'CSS3.0';
+$csstidy_config['all_properties']['animation-duration'] = 'CSS3.0';
+$csstidy_config['all_properties']['animation-fill-mode'] = 'CSS3.0';
+$csstidy_config['all_properties']['animation-iteration-count'] = 'CSS3.0';
+$csstidy_config['all_properties']['animation-name'] = 'CSS3.0';
+$csstidy_config['all_properties']['animation-play-state'] = 'CSS3.0';
+$csstidy_config['all_properties']['animation-timing-function'] = 'CSS3.0';
+
+$csstidy_config['all_properties']['ime-mode'] = 'CSS3.0';
+
+$csstidy_config['all_properties']['opacity'] = 'CSS3.0';
+
+$csstidy_config['all_properties']['perspective'] = 'CSS3.0';
+$csstidy_config['all_properties']['perspective-origin'] = 'CSS3.0';
+$csstidy_config['all_properties']['pointer-events'] = 'CSS4.0'; // ?
+$csstidy_config['all_properties']['text-align-last'] = 'CSS3.0';
+$csstidy_config['all_properties']['text-decoration-color'] = 'CSS3.0';
+$csstidy_config['all_properties']['text-decoration-line'] = 'CSS3.0';
+$csstidy_config['all_properties']['text-decoration-style'] = 'CSS3.0';
+$csstidy_config['all_properties']['transform'] = 'CSS3.0';
+$csstidy_config['all_properties']['transform-origin'] = 'CSS3.0';
+$csstidy_config['all_properties']['transform-style'] = 'CSS3.0';
+$csstidy_config['all_properties']['transition'] = 'CSS3.0';
+$csstidy_config['all_properties']['transition-delay'] = 'CSS3.0';
+$csstidy_config['all_properties']['transition-duration'] = 'CSS3.0';
+$csstidy_config['all_properties']['transition-property'] = 'CSS3.0';
+$csstidy_config['all_properties']['transition-timing-function'] = 'CSS3.0';
+
+$csstidy_config['all_properties']['border-radius'] = 'CSS3.0';
+$csstidy_config['all_properties']['box-shadow'] = 'CSS3.0';
+$csstidy_config['all_properties']['tab-size'] = 'CSS3.0';
+
 /* Speech */
 /* TODO: CSS3 */
 $csstidy_config['all_properties']['volume'] = 'CSS2.0,CSS2.1';
