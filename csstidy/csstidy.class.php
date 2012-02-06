@@ -608,10 +608,6 @@ class csstidy {
 		$old = @setlocale(LC_ALL, 0);
 		@setlocale(LC_ALL, 'C');
 
-		// PHP bug? Settings need to be refreshed in PHP4
-		//$this->print = new csstidy_print($this);
-		//$this->optimise = new csstidy_optimise($this);
-
 		//$all_properties =& $GLOBALS['csstidy']['all_properties'];
 		//$at_rules =& $GLOBALS['csstidy']['at_rules'];
 		
