@@ -857,7 +857,7 @@ class csstidy {
 						}
 						$this->property = strtolower($this->property);
 
-						$this->optimise->subvalue();
+						$this->optimise_subvalue();
 						if($this->sub_value != '') {
 							if (substr($this->sub_value, 0, 6) == 'format') {
 								$this->sub_value = str_replace(array('format(', ')'), array('format("', '")'), $this->sub_value);
@@ -870,14 +870,14 @@ class csstidy {
 
 						$this->selector = trim($this->selector);
 
-						$this->optimise->value();
+						$this->value();
 
 						$valid = csstidy::property_is_valid($this->property);
 						if((!$this->invalid_at || $this->get_cfg('preserve_css')) && (!$this->get_cfg('discard_invalid_properties') || $valid))
 						{
 							$this->css_add_property($this->at,$this->selector,$this->property,$this->value);
 							$this->_add_token(VALUE, $this->value);
-							$this->optimise->shorthands();
+							$this->shorthands();
 						}
 						if(!$valid)
 						{
@@ -910,7 +910,7 @@ class csstidy {
 
 					if(ctype_space($string{$i}))
 					{
-						$this->optimise->subvalue();
+						$this->optimise_subvalue();
 						if($this->sub_value != '') {
 							$this->sub_value_arr[] = $this->sub_value;
 							$this->sub_value = '';
@@ -982,7 +982,7 @@ class csstidy {
 			}
 		}
 
-		$this->optimise->postparse();
+		$this->postparse();
 
 		$this->print->_reset();
 
@@ -1178,5 +1178,372 @@ class csstidy {
 	public function return_plain_output_css(){
 		return $this->print->plain();
 	}
+	
+	/**
+	 * Optimises a sub-value
+	 * @access public
+	 * @version 1.0
+	 */
+	private function optimise_subvalue()
+	{
+		$replace_colors =& $this->meta_css['replace_colors'];
 
+		$this->sub_value = trim($this->sub_value);
+		if($this->sub_value == '') // caution : '0'
+		{
+			return;
+		}
+
+		$important = '';
+		if(csstidy::is_important($this->sub_value))
+		{
+			$important = '!important';
+		}
+		
+		$this->sub_value = csstidy::gvw_important($this->sub_value);
+
+		// Compress font-weight
+		if($this->property === 'font-weight' && $this->get_cfg('compress_font-weight'))
+		{
+			if($this->sub_value === 'bold')
+			{
+				$this->sub_value = '700';
+				$this->log('Optimised font-weight: Changed "bold" to "700"','Information');
+			}
+			else if($this->sub_value === 'normal')
+			{
+				$this->sub_value = '400';
+				$this->log('Optimised font-weight: Changed "normal" to "400"','Information');
+			}
+		}
+
+		$temp = $this->compress_numbers($this->sub_value);
+		if(strcasecmp($temp, $this->sub_value) !== 0)
+		{
+			if(strlen($temp) > strlen($this->sub_value)) {
+				$this->log('Fixed invalid number: Changed "'.$this->sub_value.'" to "'.$temp.'"','Warning');
+			} else {
+				$this->log('Optimised number: Changed "'.$this->sub_value.'" to "'.$temp.'"','Information');
+			}
+			$this->sub_value = $temp;
+		}
+		if($this->get_cfg('compress_colors'))
+		{
+			$temp = $this->cut_color($this->sub_value);
+			if($temp !== $this->sub_value)
+			{
+				if(isset($replace_colors[$this->sub_value])) {
+					$this->log('Fixed invalid color name: Changed "'.$this->sub_value.'" to "'.$temp.'"','Warning');
+				} else {
+					$this->log('Optimised color: Changed "'.$this->sub_value.'" to "'.$temp.'"','Information');
+				}
+				$this->sub_value = $temp;
+			}
+		}
+		$this->sub_value .= $important;
+	}
+
+	/**
+	 * Compresses numbers (ie. 1.0 becomes 1 or 1.100 becomes 1.1 )
+	 * @param string $subvalue
+	 * @return string
+	 * @version 1.2
+	 */
+	function compress_numbers($subvalue)
+	{
+		$unit_values =& $this->meta_css['unit_values'];
+		$color_values =& $this->meta_css['color_values'];
+
+		// for font:1em/1em sans-serif...;
+		if($this->property === 'font')
+		{
+			$temp = explode('/',$subvalue);
+		}
+		else
+		{
+			$temp = array($subvalue);
+		}
+		for ($l = 0; $l < count($temp); $l++)
+		{
+			// if we are not dealing with a number at this point, do not optimise anything
+			$number = $this->AnalyseCssNumber($temp[$l]);
+			if ($number === false)
+			{
+				return $subvalue;
+			}
+
+			// Fix bad colors
+			if (in_array($this->property, $color_values))
+			{
+				$temp[$l] = '#'.$temp[$l];
+				continue;
+			}
+			
+			if (abs($number[0]) > 0) {
+				if ($number[1] == '' && in_array($this->property,$unit_values,true))
+				{
+					$number[1] = 'px';
+				}
+			} else {
+				$number[1] = '';
+			}
+			
+			$temp[$l] = $number[0] . $number[1];
+		}
+
+		return ((count($temp) > 1) ? $temp[0].'/'.$temp[1] : $temp[0]);
+	}
+	
+	/**
+	 * Checks if a given string is a CSS valid number. If it is,
+	 * an array containing the value and unit is returned
+	 * @param string $string
+	 * @return array ('unit' if unit is found or '' if no unit exists, number value) or false if no number
+	 */
+	function AnalyseCssNumber($string)
+	{
+		// most simple checks first
+		if (strlen($string) == 0 || ctype_alpha($string{0})) {
+			return false;
+		}
+		
+		$units =& $this->meta_css['units'];
+		$return = array(0, '');
+		
+		$return[0] = floatval($string);
+		if (abs($return[0]) > 0 && abs($return[0]) < 1) {
+			if ($return[0] < 0) {
+				$return[0] = '-' . ltrim(substr($return[0], 1), '0');
+			} else {
+				$return[0] = ltrim($return[0], '0');
+			}
+		}
+		
+		// Look for unit and split from value if exists
+		foreach ($units as $unit)
+		{
+			$expectUnitAt = strlen($string) - strlen($unit);
+			if( ! ($unitInString = stristr( $string, $unit )) )
+			{ // mb_strpos() fails with "false"
+				continue;
+			}
+			$actualPosition = strpos($string, $unitInString);
+			if ($expectUnitAt === $actualPosition)
+			{
+				$return[1] = $unit;
+				$string = substr($string, 0, - strlen($unit));
+				break;
+			}
+		}
+		if (!is_numeric($string)) {
+			return false;
+		}
+		return $return;
+	}
+	
+	/**
+	 * Color compression function. Converts all rgb() values to #-values and uses the short-form if possible. Also replaces 4 color names by #-values.
+	 * @param string $color
+	 * @return string
+	 * @version 1.1
+	 */
+	function cut_color($color)
+	{
+		$replace_colors =& $this->meta_css['replace_colors'];
+
+		// rgb(0,0,0) -> #000000 (or #000 in this case later)
+		if(strtolower(substr($color,0,4)) === 'rgb(')
+		{
+			$color_tmp = substr($color,4,strlen($color)-5);
+			$color_tmp = explode(',',$color_tmp);
+			for ( $i = 0; $i < count($color_tmp); $i++ )
+			{
+				$color_tmp[$i] = trim ($color_tmp[$i]);
+				if(substr($color_tmp[$i],-1) === '%')
+				{
+					$color_tmp[$i] = round((255*$color_tmp[$i])/100);
+				}
+				if($color_tmp[$i]>255) $color_tmp[$i] = 255;
+			}
+			$color = '#';
+			for ($i = 0; $i < 3; $i++ )
+			{
+				if($color_tmp[$i]<16) {
+					$color .= '0' . dechex($color_tmp[$i]);
+				} else {
+					$color .= dechex($color_tmp[$i]);
+				}
+			}
+		}
+
+		// Fix bad color names
+		if(isset($replace_colors[strtolower($color)]))
+		{
+			$color = $replace_colors[strtolower($color)];
+		}
+
+		// #aabbcc -> #abc
+		if(strlen($color) == 7)
+		{
+			$color_temp = strtolower($color);
+			if($color_temp{0} === '#' && $color_temp{1} == $color_temp{2} && $color_temp{3} == $color_temp{4} && $color_temp{5} == $color_temp{6})
+			{
+				$color = '#'.$color{1}.$color{3}.$color{5};
+			}
+		}
+
+		switch(strtolower($color))
+		{
+			/* color name -> hex code */
+			case 'black': return '#000';
+			case 'fuchsia': return '#f0f';
+			case 'white': return '#fff';
+			case 'yellow': return '#ff0';
+
+			/* hex code -> color name */
+			case '#800000': return 'maroon';
+			case '#ffa500': return 'orange';
+			case '#808000': return 'olive';
+			case '#800080': return 'purple';
+			case '#008000': return 'green';
+			case '#000080': return 'navy';
+			case '#008080': return 'teal';
+			case '#c0c0c0': return 'silver';
+			case '#808080': return 'gray';
+			case '#f00': return 'red';
+		}
+
+		return $color;
+	}
+	
+		/**
+	 * Optimises $css after parsing
+	 * @access public
+	 * @version 1.0
+	 */
+	function postparse()
+	{
+		if ($this->get_cfg('preserve_css')) {
+			return;
+		}
+
+		if ($this->get_cfg('merge_selectors') === 2)
+		{
+			foreach ($this->css as $medium => $value)
+			{
+				$this->merge_selectors($this->css[$medium]);
+			}
+		}
+		
+		if ($this->get_cfg('discard_invalid_selectors')) {
+			foreach ($this->css as $medium => $value)
+			{
+				$this->discard_invalid_selectors($this->css[$medium]);
+			}
+		}
+
+		if ($this->get_cfg('optimise_shorthands') > 0)
+		{
+			foreach ($this->css as $medium => $value)
+			{
+				foreach ($value as $selector => $value1)
+				{
+					$this->css[$medium][$selector] = csstidy_optimise::merge_4value_shorthands($this->css[$medium][$selector]);
+
+					if ($this->get_cfg('optimise_shorthands') < 2) {
+						continue;
+					}
+
+					$this->css[$medium][$selector] = csstidy_optimise::merge_font($this->css[$medium][$selector]);
+
+					if ($this->get_cfg('optimise_shorthands') < 3) {
+						continue;
+					}
+					
+					$this->css[$medium][$selector] = csstidy_optimise::merge_bg($this->css[$medium][$selector]);
+					if (empty($this->css[$medium][$selector])) {
+						unset($this->css[$medium][$selector]);
+					}
+
+				}
+			}
+		}
+	}
+
+	/**
+	 * Optimises values
+	 * @access public
+	 * @version 1.0
+	 */
+	function value()
+	{
+		$shorthands =& $this->meta_css['shorthands'];
+
+		// optimise shorthand properties
+		if(isset($shorthands[$this->property]))
+		{
+			$temp = csstidy_optimise::shorthand($this->value); // FIXME - move
+			if($temp != $this->value)
+			{
+				$this->log('Optimised shorthand notation ('.$this->property.'): Changed "'.$this->value.'" to "'.$temp.'"','Information');
+			}
+			$this->value = $temp;
+		}
+
+		// Remove whitespace at ! important
+		if($this->value != $this->compress_important($this->value))
+		{
+			$this->log('Optimised !important','Information');
+		}
+	}
+	
+		/**
+	 * Removes unnecessary whitespace in ! important
+	 * @param string $string
+	 * @return string
+	 * @access public
+	 * @version 1.1
+	 */
+	function compress_important(&$string)
+	{
+		if(csstidy::is_important($string))
+		{
+			$string = csstidy::gvw_important($string) . '!important';
+		}
+		return $string;
+	}
+	
+	/**
+	 * Optimises shorthands
+	 * @access public
+	 * @version 1.0
+	 */
+	function shorthands()
+	{
+		$shorthands =& $this->meta_css['shorthands'];
+
+		if( !$this->get_cfg('optimise_shorthands') || $this->get_cfg('preserve_css') ) 
+		{
+			return;
+		}
+
+		if($this->property === 'font' && $this->get_cfg('optimise_shorthands') > 0)
+		{
+			unset($this->css[$this->at][$this->selector]['font']);
+			$this->merge_css_blocks($this->at,$this->selector,csstidy_optimise::dissolve_short_font($this->value));
+		}
+		if($this->property === 'background' && $this->get_cfg('optimise_shorthands') > 1)
+		{
+			unset($this->css[$this->at][$this->selector]['background']);
+			$this->merge_css_blocks($this->at,$this->selector,csstidy_optimise::dissolve_short_bg($this->value));
+		}
+		if(isset($shorthands[$this->property]))
+		{
+			$this->merge_css_blocks($this->at,$this->selector,csstidy_optimise::dissolve_4value_shorthands($this->property,$this->value));
+			if(is_array($shorthands[$this->property]))
+			{
+				unset($this->css[$this->at][$this->selector][$this->property]);
+			}
+		}
+	}
 }

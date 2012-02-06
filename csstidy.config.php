@@ -313,12 +313,42 @@ $csstidy_config['replace_colors']['yellowgreen'] = '#9acd32';
  * @version 1.1
  */
 $csstidy_config['shorthands'] = array();
-$csstidy_config['shorthands']['border-color'] = array('border-top-color','border-right-color','border-bottom-color','border-left-color');
-$csstidy_config['shorthands']['border-style'] = array('border-top-style','border-right-style','border-bottom-style','border-left-style');
-$csstidy_config['shorthands']['border-width'] = array('border-top-width','border-right-width','border-bottom-width','border-left-width');
-$csstidy_config['shorthands']['margin'] = array('margin-top','margin-right','margin-bottom','margin-left');
-$csstidy_config['shorthands']['padding'] = array('padding-top','padding-right','padding-bottom','padding-left');
-$csstidy_config['shorthands']['border-radius'] = array('border-top-left-radius', 'border-top-right-radius', 'border-bottom-right-radius', 'border-bottom-left-radius');
+$csstidy_config['shorthands']['border-color'] = array(
+	'border-top-color',
+	'border-right-color',
+	'border-bottom-color',
+	'border-left-color'
+	);
+$csstidy_config['shorthands']['border-style'] = array(
+	'border-top-style',
+	'border-right-style',
+	'border-bottom-style',
+	'border-left-style'
+	);
+$csstidy_config['shorthands']['border-width'] = array(
+	'border-top-width',
+	'border-right-width',
+	'border-bottom-width',
+	'border-left-width'
+	);
+$csstidy_config['shorthands']['margin'] = array(
+	'margin-top',
+	'margin-right',
+	'margin-bottom',
+	'margin-left'
+	);
+$csstidy_config['shorthands']['padding'] = array(
+	'padding-top',
+	'padding-right',
+	'padding-bottom',
+	'padding-left'
+	);
+$csstidy_config['shorthands']['border-radius'] = array(
+	'border-top-left-radius',
+	'border-top-right-radius',
+	'border-bottom-right-radius',
+	'border-bottom-left-radius'
+	);
 
 /**
  * All CSS Properties. Needed for csstidy::property_is_next()
@@ -469,6 +499,7 @@ $csstidy_config['all_properties']['border-top-right-radius'] = 'CSS3.0';
 $csstidy_config['all_properties']['border-bottom-right-radius'] = 'CSS3.0';
 $csstidy_config['all_properties']['border-bottom-left-radius'] = 'CSS3.0';
 $csstidy_config['all_properties']['box-shadow'] = 'CSS3.0';
+$csstidy_config['all_properties']['background-size'] = 'CSS3.0';
 $csstidy_config['all_properties']['tab-size'] = 'CSS3.0';
 
 /* Speech */
