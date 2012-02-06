@@ -315,6 +315,8 @@ class csstidy {
 		
 		$this->meta_css = $metacss;
 		
+		$this->template = $this->meta_css['predefined_templates']['low_compression'];
+		
 		$this->optimise = new csstidy_optimise($this);
 		$this->print = new csstidy_print($this);
 	}
@@ -408,7 +410,7 @@ class csstidy {
 	 * @access private
 	 * @version 1.0
 	 */
-	public function _add_token($type, $data, $do = false) {
+	public function _add_token($type, $data, $do = false) { // FIXME?
 		if($this->get_cfg('preserve_css') || $do) {
 			$this->tokens[] = array($type, ($type == COMMENT) ? $data : trim($data));
 		}
@@ -428,7 +430,7 @@ class csstidy {
 		{
 			$line = $this->line;
 		}
-		$line = intval($line);
+		$line = intval($line); // WTF?
 		$add = array('m' => $message, 't' => $type);
 		if(!isset($this->log[$line]) || !in_array($add,$this->log[$line]))
 		{
@@ -512,6 +514,8 @@ class csstidy {
 	 * @param bool $pre_code whether to add pre and code tags around the code (for light HTML formatted templates)
 	 * @access public
 	 * @version 1.4
+	 * 
+	 * @deprecated
 	 */
 	public function write($filename, $formatted=false, $doctype='xhtml1.1', $externalcss=true, $title='', $lang='en', $pre_code=true)
 	{

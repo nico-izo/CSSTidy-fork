@@ -61,7 +61,15 @@ $csstidy_config['units'] = array('in','cm','mm','pt','pc','px','rem','em','%','e
  *
  * @version 1.0
  */
-$csstidy_config['at_rules'] = array('page' => 'is','font-face' => 'is','charset' => 'iv', 'import' => 'iv','namespace' => 'iv','media' => 'at');
+$csstidy_config['at_rules'] = array(
+	'page' => 'is',
+	'font-face' => 'is',
+	'charset' => 'iv',
+	'import' => 'iv',
+	'namespace' => 'iv',
+	'media' => 'at',
+	'keyframes' => 'at' // ORLY?
+);
 
  /**
  * Properties that need a value with unit
@@ -70,11 +78,47 @@ $csstidy_config['at_rules'] = array('page' => 'is','font-face' => 'is','charset'
  * @see compress_numbers();
  * @version 1.2
  */
-$csstidy_config['unit_values'] = array ('background', 'background-position', 'border', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border-width',
-                                            'border-top-width', 'border-right-width', 'border-left-width', 'border-bottom-width', 'bottom', 'border-spacing',
-											'font-size', 'height', 'left', 'margin', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'max-height',
-											'max-width', 'min-height', 'min-width', 'outline', 'outline-width', 'padding', 'padding-top', 'padding-right', 
-											'padding-bottom', 'padding-left', 'right', 'top', 'text-indent', 'letter-spacing', 'word-spacing', 'width');
+$csstidy_config['unit_values'] = array (
+	'background',
+	'background-position', 
+	'border', 
+	'border-top', 
+	'border-right', 
+	'border-bottom', 
+	'border-left', 
+	'border-width',
+	'border-top-width', 
+	'border-right-width', 
+	'border-left-width',
+	'border-bottom-width',
+	'bottom',
+	'border-spacing',
+	'font-size', 
+	'height', 
+	'left', 
+	'margin', 
+	'margin-top', 
+	'margin-right', 
+	'margin-bottom', 
+	'margin-left', 
+	'max-height',
+	'max-width', 
+	'min-height', 
+	'min-width', 
+	'outline', 
+	'outline-width', 
+	'padding', 
+	'padding-top', 
+	'padding-right', 
+	'padding-bottom', 
+	'padding-left', 
+	'right', 
+	'top', 
+	'text-indent', 
+	'letter-spacing', 
+	'word-spacing', 
+	'width'
+	);
 
 /**
  * Properties that allow <color> as value
@@ -369,8 +413,8 @@ $csstidy_config['all_properties']['page'] = 'CSS2.0';
 $csstidy_config['all_properties']['position'] = 'CSS2.0,CSS2.1,CSS3.0';
 $csstidy_config['all_properties']['quotes'] = 'CSS2.0,CSS2.1,CSS3.0';
 $csstidy_config['all_properties']['resize'] = 'CSS3.0';
-$csstidy_config['all_properties']['right'] = 'CSS2.0,CSS2.1';
-$csstidy_config['all_properties']['size'] = 'CSS1.0,CSS2.0'; // WTF
+$csstidy_config['all_properties']['right'] = 'CSS2.0,CSS2.1,CSS3.0';
+$csstidy_config['all_properties']['size'] = 'CSS1.0,CSS2.0,CSS3.0';
 $csstidy_config['all_properties']['speak-header'] = 'CSS2.0,CSS2.1';
 $csstidy_config['all_properties']['table-layout'] = 'CSS2.0,CSS2.1,CSS3.0';
 $csstidy_config['all_properties']['top'] = 'CSS2.0,CSS2.1,CSS3.0';
@@ -420,6 +464,10 @@ $csstidy_config['all_properties']['transition-property'] = 'CSS3.0';
 $csstidy_config['all_properties']['transition-timing-function'] = 'CSS3.0';
 
 $csstidy_config['all_properties']['border-radius'] = 'CSS3.0';
+$csstidy_config['all_properties']['border-top-left-radius'] = 'CSS3.0';
+$csstidy_config['all_properties']['border-top-right-radius'] = 'CSS3.0';
+$csstidy_config['all_properties']['border-bottom-right-radius'] = 'CSS3.0';
+$csstidy_config['all_properties']['border-bottom-left-radius'] = 'CSS3.0';
 $csstidy_config['all_properties']['box-shadow'] = 'CSS3.0';
 $csstidy_config['all_properties']['tab-size'] = 'CSS3.0';
 

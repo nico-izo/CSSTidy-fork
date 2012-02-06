@@ -8,13 +8,8 @@ $config = array();
 
 $csstidy = new csstidy($csstidy_config);
 $csstidy->load_template('highest_compression');
-
-$csstidy->parse(".lol { color: #ffffff; border-radius: 5px 5px 5px 5px; } @media print {
-    p {
-     widows: 3;
-     orphans: 3;
-    }
-   }");
+$file = file_get_contents("./test.css");
+$csstidy->parse($file);
 
 //var_dump($csstidy);
 
