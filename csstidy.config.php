@@ -576,17 +576,17 @@ $csstidy_config['predefined_templates']['highest_compression'][] = '<span class=
 $csstidy_config['predefined_templates']['highest_compression'][] = '</span>'; // after comment
 $csstidy_config['predefined_templates']['highest_compression'][] = '';
 
-$csstidy_config['predefined_templates']['low_compression'][] = '<span class="at">';
-$csstidy_config['predefined_templates']['low_compression'][] = '</span> <span class="format">{</span>'."\n";
-$csstidy_config['predefined_templates']['low_compression'][] = '<span class="selector">';
-$csstidy_config['predefined_templates']['low_compression'][] = '</span>'."\n".'<span class="format">{</span>'."\n";
-$csstidy_config['predefined_templates']['low_compression'][] = '	<span class="property">';
-$csstidy_config['predefined_templates']['low_compression'][] = '</span><span class="value">';
-$csstidy_config['predefined_templates']['low_compression'][] = '</span><span class="format">;</span>'."\n";
-$csstidy_config['predefined_templates']['low_compression'][] = '<span class="format">}</span>';
-$csstidy_config['predefined_templates']['low_compression'][] = "\n\n";
-$csstidy_config['predefined_templates']['low_compression'][] = "\n".'<span class="format">}</span>'."\n\n";
-$csstidy_config['predefined_templates']['low_compression'][] = '	';
-$csstidy_config['predefined_templates']['low_compression'][] = '<span class="comment">'; // before comment
-$csstidy_config['predefined_templates']['low_compression'][] = '</span>'."\n"; // after comment
-$csstidy_config['predefined_templates']['low_compression'][] = "\n";
+$csstidy_config['predefined_templates']['no_compression'][] = '';
+$csstidy_config['predefined_templates']['no_compression'][] = ' {'."\n";
+$csstidy_config['predefined_templates']['no_compression'][] = '';
+$csstidy_config['predefined_templates']['no_compression'][] = "\n".'{'."\n";
+$csstidy_config['predefined_templates']['no_compression'][] = "\t"; // Selectors
+$csstidy_config['predefined_templates']['no_compression'][] = '';
+$csstidy_config['predefined_templates']['no_compression'][] = ';'."\n";
+$csstidy_config['predefined_templates']['no_compression'][] = '}';
+$csstidy_config['predefined_templates']['no_compression'][] = "\n\n";
+$csstidy_config['predefined_templates']['no_compression'][] = "\n".'}'."\n\n";
+$csstidy_config['predefined_templates']['no_compression'][] = "\t"; // @media and another
+$csstidy_config['predefined_templates']['no_compression'][] = ''; // before comment
+$csstidy_config['predefined_templates']['no_compression'][] = ''."\n"; // after comment
+$csstidy_config['predefined_templates']['no_compression'][] = "\n";
