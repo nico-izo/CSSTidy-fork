@@ -500,6 +500,8 @@ $csstidy_config['all_properties']['border-bottom-right-radius'] = 'CSS3.0';
 $csstidy_config['all_properties']['border-bottom-left-radius'] = 'CSS3.0';
 $csstidy_config['all_properties']['box-shadow'] = 'CSS3.0';
 $csstidy_config['all_properties']['background-size'] = 'CSS3.0';
+$csstidy_config['all_properties']['background-clip'] = 'CSS3.0';
+$csstidy_config['all_properties']['background-origin'] = 'CSS3.0';
 $csstidy_config['all_properties']['tab-size'] = 'CSS3.0';
 
 /* Speech */
@@ -529,7 +531,6 @@ $csstidy_config['all_properties']['speak-numeral'] = 'CSS2.0,CSS2.1';
  *
  * @version 1.0
  * @see csstidy::load_template()
- * @deprecated
  */
 $csstidy_config['predefined_templates']['default'][] = '<span class="at">'; //string before @rule
 $csstidy_config['predefined_templates']['default'][] = '</span> <span class="format">{</span>'."\n"; //bracket after @-rule
@@ -580,7 +581,7 @@ $csstidy_config['predefined_templates']['no_compression'][] = '';
 $csstidy_config['predefined_templates']['no_compression'][] = ' {'."\n";
 $csstidy_config['predefined_templates']['no_compression'][] = '';
 $csstidy_config['predefined_templates']['no_compression'][] = "\n".'{'."\n";
-$csstidy_config['predefined_templates']['no_compression'][] = "\t"; // Selectors
+$csstidy_config['predefined_templates']['no_compression'][] = "\t";
 $csstidy_config['predefined_templates']['no_compression'][] = '';
 $csstidy_config['predefined_templates']['no_compression'][] = ';'."\n";
 $csstidy_config['predefined_templates']['no_compression'][] = '}';
@@ -590,3 +591,40 @@ $csstidy_config['predefined_templates']['no_compression'][] = "\t"; // @media an
 $csstidy_config['predefined_templates']['no_compression'][] = ''; // before comment
 $csstidy_config['predefined_templates']['no_compression'][] = ''."\n"; // after comment
 $csstidy_config['predefined_templates']['no_compression'][] = "\n";
+
+/**
+ * Need prefix values
+ * version 1.0
+ * @see csstidy::need_prefix()
+ * @todo MOAR!!!
+ */
+
+$csstidy_config['need_vendor_prefixes']['border-radius'] = array ('-moz-border-radius', '-webkit-border-radius');
+$csstidy_config['need_vendor_prefixes']['border-top-left-radius'] = array ('-moz-border-radius-topleft', '-webkit-border-top-left-radius');
+$csstidy_config['need_vendor_prefixes']['border-top-right-radius'] = array ('-moz-border-radius-topright', '-webkit-border-top-right-radius');
+$csstidy_config['need_vendor_prefixes']['border-bottom-right-radius'] = array ('-moz-border-radius-bottomright', '-webkit-border-bottom-right-radius');
+$csstidy_config['need_vendor_prefixes']['border-bottom-left-radius'] = array ('-moz-border-radius-bottomleft', '-webkit-border-bottom-left-radius');
+
+$csstidy_config['need_vendor_prefixes']['box-shadow'] = array ('-moz-box-shadow', '-webkit-box-shadow');
+
+$csstidy_config['need_vendor_prefixes']['transition'] = array ('-moz-transition', '-webkit-transition', '-o-transition', '-ms-transition');
+$csstidy_config['need_vendor_prefixes']['transition-delay'] = array ('-moz-transition-delay', '-webkit-transition-delay', '-o-transition-delay', '-ms-transition-delay');
+$csstidy_config['need_vendor_prefixes']['transition-duration'] = array ('-moz-transition-duration', '-webkit-transition-duration', '-o-transition-duration', '-ms-transition-duration');
+$csstidy_config['need_vendor_prefixes']['transition-property'] = array ('-moz-transition-property', '-webkit-transition-property', '-o-transition-property', '-ms-transition-property');
+$csstidy_config['need_vendor_prefixes']['transition-timing-function'] = array ('-moz-transition-timing-function', '-webkit-transition-timing-function', '-o-transition-timing-function', '-ms-transition-timing-function');
+
+$csstidy_config['need_vendor_prefixes']['@keyframes'] = array ('@-moz-keyframes', '@-webkit-keyframes', '@-o-keyframes', '@-ms-keyframes');
+
+$csstidy_config['need_vendor_prefixes']['animation'] = array ('-moz-animation', '-webkit-animation', '-o-animation', '-ms-animation');
+$csstidy_config['need_vendor_prefixes']['animation-delay'] = array ('-moz-animation-delay', '-webkit-animation-delay', '-o-animation-delay', '-ms-animation-delay');
+$csstidy_config['need_vendor_prefixes']['animation-direction'] = array ('-moz-animation-direction', '-webkit-animation-direction', '-o-animation-direction', '-ms-animation-direction');
+$csstidy_config['need_vendor_prefixes']['animation-duration'] = array ('-moz-animation-duration', '-webkit-animation-duration', '-o-animation-duration', '-ms-animation-duration');
+$csstidy_config['need_vendor_prefixes']['animation-fill-mode'] = array ('-moz-animation-fill-mode', '-webkit-animation-fill-mode', '-o-animation-fill-mode', '-ms-animation-fill-mode');
+$csstidy_config['need_vendor_prefixes']['animation-iteration-count'] = array ('-moz-animation-iteration-count', '-webkit-animation-iteration-count', '-o-animation-iteration-count', '-ms-animation-iteration-count');
+$csstidy_config['need_vendor_prefixes']['animation-name'] = array ('-moz-animation-name', '-webkit-animation-name', '-o-animation-name', '-ms-animation-name');
+$csstidy_config['need_vendor_prefixes']['animation-play-state'] = array ('-moz-animation-play-state', '-webkit-animation-play-state', '-o-animation-play-state', '-ms-animation-play-state');
+$csstidy_config['need_vendor_prefixes']['animation-timing-function'] = array ('-moz-animation-timing-function', '-webkit-animation-timing-function', '-o-animation-timing-function', '-ms-animation-timing-function');
+
+$csstidy_config['need_vendor_prefixes']['transform'] = array('-moz-transform', '-webkit-transform', '-o-transform', '-ms-transform');
+
+$csstidy_config['need_vendor_prefixes']['background-size'] = array('-moz-background-size', '-webkit-background-size', '-o-background-size');

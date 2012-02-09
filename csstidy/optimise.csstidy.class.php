@@ -346,10 +346,11 @@ class csstidy_optimise
 	function dissolve_short_bg($str_value)
 	{
 		$background_prop_default =& $this->meta_css['background_prop_default'];
-		$repeat = array('repeat','repeat-x','repeat-y','no-repeat','space');
+		$repeat = array('repeat','repeat-x','repeat-y','no-repeat','space','round');
 		$attachment = array('scroll','fixed','local');
-		$clip = array('border','padding');
-		$origin = array('border','padding','content');
+		$clip = array('border-box','padding-box','content-box');
+		$origin = array('border-box','padding-box','content-box');
+		$bsize = array('contain','cover');
 		$pos = array('top','center','bottom','left','right');
 		$important = '';
 		$return = array('background-image' => null,'background-size' => null,'background-repeat' => null,'background-position' => null,'background-attachment'=>null,'background-clip' => null,'background-origin' => null,'background-color' => null);
@@ -488,7 +489,7 @@ class csstidy_optimise
 				{
 					if($bg_property === 'background-size')
 					{
-						$new_bg_value .= '('.$temp[$i].') ';
+						$new_bg_value .= '/'.$temp[$i].' ';
 					}
 					else
 					{

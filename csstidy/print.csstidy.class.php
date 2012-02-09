@@ -184,7 +184,7 @@ class csstidy_print
 		}
 
 		if ($this->parser->get_cfg('timestamp')) {
-			array_unshift($this->tokens, array(COMMENT, ' CSSTidy ' . $this->parser->version . ': ' . date('r') . ' '));
+			array_unshift($this->tokens, array(COMMENT, ' CSSTidy ' . $this->parser->get_version() . ': ' . date('r') . ' '));
 		}
 
 		if (!empty($this->charset)) {
@@ -408,7 +408,7 @@ class csstidy_print
 	}
 
 	/**
-	 * Get the size of either input or output CSS in KiB
+	 * Get the size of either input or output CSS in bytes
 	 * @param string $loc default is "output"
 	 * @access public
 	 * @return integer
@@ -421,9 +421,9 @@ class csstidy_print
 		}
 
 		if ($loc === 'input') {
-			return (strlen($this->input_css) / 1024);
+			return (strlen($this->input_css));
 		} else {
-			return (strlen($this->output_css_plain) / 1024);
+			return (strlen($this->output_css_plain));
 		}
 	}
 }

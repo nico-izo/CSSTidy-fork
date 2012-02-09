@@ -113,7 +113,7 @@ class csstidy {
 	 * @var string
 	 * @access private
 	 */
-	private $version = '1.3';
+	private $version = '1.4';
 
 	/**
 	 * Stores the settings
@@ -295,7 +295,7 @@ class csstidy {
 			2 + font property optimization
 			3 + background property optimization
 			*/
-			$this->settings['optimise_shorthands'] = 3;
+			$this->settings['optimise_shorthands'] = 2; // 3 NOT RECOMMEND!
 			$this->settings['remove_last_semicolon'] = true;
 			/* rewrite all properties with low case, better for later gzip */
 			$this->settings['case_properties'] = 1;
@@ -314,6 +314,9 @@ class csstidy {
 			$this->settings['css_level'] = 'CSS3.0';
 			$this->settings['preserve_css'] = false;
 			$this->settings['timestamp'] = false;
+			
+			$this->settings['add_vendor_prefixed_properties'] = true;
+			$this->settings['only_prefix'] = FALSE;
 		}
 		else
 		{
@@ -383,8 +386,6 @@ class csstidy {
 	 * @access public
 	 * @return bool
 	 * @version 1.0
-	 * 
-	 * @deprecated
 	 */
 	public function set_cfg($setting,$value=null)
 	{
@@ -1046,6 +1047,12 @@ class csstidy {
 		$this->print->_reset();
 
 		@setlocale(LC_ALL, $old); // Set locale back to original setting
+		
+		if($this->get_cfg('add_vendor_prefixed_properties'))
+		{
+			$this->add_nonw3_properties();
+		}
+			
 
 		return !(empty($this->css) && empty($this->import) && empty($this->charset) && empty($this->tokens) && empty($this->namespace));
 	}
@@ -1607,10 +1614,10 @@ class csstidy {
 	
 	/**
 	 * Optimises shorthands
-	 * @access public
+	 * @access private
 	 * @version 1.0
 	 */
-	function shorthands()
+	private function shorthands()
 	{
 		$shorthands =& $this->meta_css['shorthands'];
 
@@ -1648,7 +1655,7 @@ class csstidy {
 	 * regular expression
 	 * @version 1.4
 	 */
-	function discard_invalid_selectors(&$array)
+	private function discard_invalid_selectors(&$array)
 	{
 		$invalid = array('+' => true, '~' => true, ',' => true, '>' => true);
 		foreach ($array as $selector => $decls)
@@ -1675,5 +1682,156 @@ class csstidy {
 	public function get_log()
 	{
 		return $this->log;
+	}
+	
+	/**
+	 * Add non W3C properties for browser compatibility. Example: border-radius will become -moz- and -webkit- prefixed.
+	 */
+	private function add_nonw3_properties()
+	{
+		foreach ($this->css as $medium => &$selector)
+		{
+			//print("!ALARM:".$medium.":ALARM!");
+			//print_r($selector);
+			if(strpos($medium, "@keyframes") === 0)
+			{
+				$str = explode(" ", $medium);
+				$this->add_vendorprefixed_keyframes($selector, $str[1]);
+				continue;
+			}
+			
+			if(strpos($medium, "@-") === 0)
+			{
+				continue;
+			}
+			foreach($selector as $name => &$properties)
+			{
+				foreach($properties as $property => &$value)
+				{
+					if(count($this->need_prefix($property)))
+					{
+						foreach($this->need_prefix($property) as $prefixed_prop)
+						{	
+							if(!$this->get_cfg('only_prefix'))
+							{
+								$properties[$prefixed_prop] = $value;
+							}
+							else
+							{
+								(!(strpos($prefixed_prop, $this->get_cfg('vendor_prefix')) === 0))?:$properties[$prefixed_prop] = $value;
+							}
+						}
+					}
+					elseif ($this->value_need_prefix($value))
+					{
+					}
+					 
+					unset($property);
+					unset($value);
+				}
+				unset($name);
+				unset($properties);
+			}
+			unset($selector);
+		}
+	}
+	
+	/**
+	 * Returns true or false in case of need property the vendor prefix or not.
+	 */
+	private function need_prefix($property)
+	{
+		return isset($this->meta_css['need_vendor_prefixes'][$property])?$this->meta_css['need_vendor_prefixes'][$property]:array();
+	}
+	
+	/**
+	 * Checks, if the prefixed analog of the property needs the same value.
+	 * Example: border-radius and -moz-border-radius uses the same value, but background: linear-gradient need different values
+	 * @todo
+	 */
+	private function value_need_prefix($value, $prop = NULL)
+	{
+		//if(isset($this->meta_css['value_need_vendor_prefixes'][$prop][$value]))
+	}
+	
+	/**
+	 * Simple functions that prints difference
+	 */
+	public function get_diff() {
+		print("Input (Bytes):".$this->print->size('input')."\n");
+		print("Output (bytes):".$this->print->size()."\n");
+	}
+	
+	/**
+	 * Add @keyframes with vendor prefix and prefixed content.
+	 * @todo rewrite
+	 */
+	private function add_vendorprefixed_keyframes($content, $name)
+	{
+		
+		foreach($this->need_prefix("@keyframes") as $prefixed_keyframes)
+		{	
+			if(!$this->get_cfg('only_prefix'))
+			{
+				$this->css[$prefixed_keyframes." ".$name] = $content;
+				$prefix = explode("-", $prefixed_keyframes);
+				$prefix = $prefix[1];
+				$this->prefix_codeblock($this->css[$prefixed_keyframes." ".$name], $prefix);
+			}
+			else
+			{
+				if(strpos($prefixed_keyframes, "@".$this->get_cfg('vendor_prefix')) === 0)
+				{
+					$this->css[$prefixed_keyframes." ".$name] = $content;
+					$this->prefix_codeblock($this->css[$prefixed_keyframes." ".$name], $this->get_cfg('vendor_prefix'));
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Add $prefix from param to props where needed
+	 * @param &$codeblock array
+	 * @param $prefix string
+	 * @return void
+	 * @access private
+	 * @version 1.0
+	 */
+	private function prefix_codeblock(&$codeblock, $prefix)
+	{
+		foreach($codeblock as $name => &$properties)
+		{
+			foreach($properties as $property => &$value)
+			{
+				if(count($this->need_prefix($property)))
+				{
+					foreach($this->need_prefix($property) as $prefixed_prop)
+					{	
+						if(strpos($prefixed_prop, $prefix) === 0)
+						{
+							$properties[$prefixed_prop] = $value;
+							unset($codeblock[$name][$property]);
+						}
+					}
+				}
+				// FIXME: here we need check for values
+					 
+				unset($property);
+				unset($value);
+			}
+			unset($name);
+			unset($properties);
+		}
+	}
+	
+	/**
+	 * Returns version.
+	 * @return int
+	 * @access public
+	 * @version 1.0
+	 */
+	public function get_version()
+	{
+		return $this->version;
 	}
 }
