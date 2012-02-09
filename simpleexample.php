@@ -9,13 +9,13 @@ $config = parse_ini_file("./simpleconfig.ini", true);
 $config['csstidy']['vendor_prefix'] = '-moz-';
 
 $csstidy = new csstidy($csstidy_config, $config['csstidy']);
-$csstidy->load_template('highest_compression');
-$file = file_get_contents("./qutim.pure.css");
+$csstidy->load_template('no_compression');
+$file = file_get_contents("./test.css");
 $csstidy->parse($file);
 
 //var_dump($csstidy);
 
-//echo $csstidy->return_plain_output_css();
+echo $csstidy->return_plain_output_css();
 
 //print_r($csstidy->get_log());
 
@@ -27,4 +27,4 @@ foreach($csstidy->get_log() as $l => $m)
 	}
 }
 
-//$csstidy->get_diff();
+$csstidy->get_diff();

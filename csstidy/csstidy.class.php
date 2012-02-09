@@ -369,7 +369,7 @@ class csstidy {
 				break;
 
 			case 'low':
-				$this->load_template('low_compression');
+				$this->load_template('no_compression');
 				break;
 
 			default:
@@ -850,7 +850,8 @@ class csstidy {
 						elseif(($string{$i} === '"' || $string{$i} === "'" || $string{$i} === '('))
 						{
 							$this->cur_string = $string{$i};
-							$this->str_char = ($string{$i} === '(') ? ')' : $string{$i};
+							$this->str_char = ($string{$i} === '(') ? ')' : $string{$i}; // FIXME!!!!!!!!!
+
 							$this->status = 'instr';
 							$this->from = 'iv';
 						}
@@ -913,7 +914,7 @@ class csstidy {
 								{
 									$this->sub_value = str_replace(array('format(', ')'), array('format("', '")'), $this->sub_value);
 								}
-								$this->sub_value_arr[] = $this->sub_value;
+								$this->sub_value_arr[] = $this->sub_value; 
 								$this->sub_value = '';
 							}
 
@@ -973,6 +974,9 @@ class csstidy {
 
 				/* Case in string */
 				case 'instr':
+					if($string{$i} == " ")
+						$this->cur_string .= " ";
+					
 					if($this->str_char === ')' && ($string{$i} === '"' || $string{$i} === '\'') && !$this->str_in_str && !csstidy::escaped($string,$i))
 					{
 						$this->str_in_str = true;
